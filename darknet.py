@@ -146,14 +146,14 @@ class Darknet(nn.Module):
 
         return out0, out1, out2
 
-def darknet53(pretrained=False, filepath):
+def darknet53(filepath=None):
     """
     Constructs a Darknet-53 model for YOLOv3.
     Args:
         pretrained (bool): If True, returns a pre-trained model
     """
     model = Darknet([1, 2, 8, 8, 4, 3, 3, 3])
-    if pretrained:
+    if filepath is not None:
         state_dict = torch.load(filepath)
         model.load_state_dict(state_dict)
     return model

@@ -7,7 +7,7 @@ import argparse
 def parse_args():
     parser = argparse.ArgumentParser('YOLOv3')
 
-    parser.add_argument('--cuda', type=bool, default=True)
+    parser.add_argument('--cuda', action="store_true", default=False)
     parser.add_argument('--modelpath', type=str, default='model/darknet53.pth.tar')
     parser.add_argument('--classfile', type=str, default='model/coco.names')
     parser.add_argument('--image', type=str, default='images/dog-cycle-car.png')
@@ -18,7 +18,7 @@ def parse_args():
 def main():
     args = parse_args()
 
-    model = darknet53() 
+    model = darknet53(args.modelpath).eval()
 
     img_ori = cv2.imread(args.image)
     inp_dim = args.resolution, args.resolution
